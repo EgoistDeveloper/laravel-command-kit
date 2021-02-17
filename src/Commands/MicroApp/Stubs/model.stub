@@ -1,0 +1,24 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{class}} extends Model
+{
+    protected $table = '{{table}}';
+    
+    protected $guarded = ['id'];
+
+    protected $fillable = [];
+
+    // public function items()
+    // {
+    //     return $this->hasMany(HomeSliderItem::class, 'home_slider_id', 'id');
+    // }
+
+    // public function file()
+    // {
+    //     return $this->belongsTo(ArticleFile::class, 'id', 'article_id');
+    // }
+}

@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class {{class}} extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{{table}}', function (Blueprint $table) {
+            $table->id();
+
+            // $table->integer('user_id')->unsigned();
+            // $table->integer('order_level_id')->unsigned();
+            // $table->string('project_title', 250);
+            // $table->integer('article_count');
+            // $table->integer('order_type_id')->unsigned();
+            // $table->integer('word_count')->unsigned();
+            // $table->text('article_titles')->nullable();
+            // $table->text('order_note')->nullable();
+            // $table->decimal('price', 10, 2)->unsigned();
+            // $table->enum('status', ['preparing', 'complete', 'cancelled', 'waiting_payment'])->default('waiting_payment');
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('{{table}}');
+    }
+}

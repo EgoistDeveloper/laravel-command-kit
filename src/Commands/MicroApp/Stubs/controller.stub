@@ -1,0 +1,88 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Support\Facades\Cache;
+
+use App\Http\Controllers\Controller;
+
+use {{repository_namespace}};
+use {{request_namespace}};
+
+class {{class}} extends Controller
+{
+    protected ${{repository_class_var}} = null;
+    
+    public function __construct(
+        {{repository_class}} ${{repository_class_var}}
+    )
+    {
+        $this->{{repository_class_var}} = ${{repository_class_var}};
+    }
+
+    public function index(){
+        $items = $this->{{repository_class_var}}->paginate(25);
+
+        return view('path.to.index', compact(
+            'items'
+        ));
+    }
+
+    public function create(){}
+
+    public function show($id){
+        $item = $this->{{repository_class_var}}->find($id);
+
+        return $this->jsonResponse($item);
+    }
+
+    public function store({{request_class}} $request){
+        $result = $this->{{repository_class_var}}->create($request->all());
+
+        if ($result){
+            return $this->jsonResponse([
+                'message' => 'Öğe eklendi',
+                'reload' => true
+            ], 200);    
+        }
+
+        return $this->jsonResponse([
+            'message' =>  'İşlem başarısız'
+        ], 400);
+    }
+
+    public function update({{request_class}} $request, $id){
+        $result = $this->{{repository_class_var}}->update($request->all(), $id);
+
+        if ($result){
+            return $this->jsonResponse([
+                'message' => 'Öğe güncellendi',
+                'reload' => true
+            ], 200);    
+        }
+
+        return $this->jsonResponse([
+            'message' =>  'İşlem başarısız'
+        ], 400);
+    }
+
+    public function destroy($id){
+        $item = $this->{{repository_class_var}}->find($id);
+
+        if ($item){
+            $result = $item->delete();
+
+            if ($result){
+                //$categoryRelationsResult = $this->{{repository_class_var}}->removeAllRelations($item->id, false);
+
+                return $this->jsonResponse([
+                    'message' => 'Öğe silindi.'
+                ], 200);
+            }
+        }
+
+        return $this->jsonResponse([
+            'message' => 'Öğe silinemedi'
+        ], 400);
+    }
+}
